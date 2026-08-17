@@ -1,0 +1,4 @@
+- insert:
+    - id: dsh-reducer-fixture-b
+      name: dsh-reducer-fixture-b
+      inject: [tools]

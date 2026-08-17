@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dsh-plugin-reducer report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "tool",
+    "generatedAt",
+    "runtime",
+    "dsh",
+    "probe",
+    "result",
+    "safety",
+    "trials"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version", "algorithm"],
+      "properties": {
+        "name": { "const": "dsh-plugin-reducer" },
+        "version": { "type": "string" },
+        "algorithm": { "type": "string" }
+      }
+    },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "runtime": {
+      "type": "object",
+      "required": ["node", "platform", "arch"],
+      "properties": {
+        "node": { "type": "string" },
+        "platform": { "type": "string" },
+        "arch": { "type": "string" }
+      }
+    },
+    "dsh": {
+      "type": "object",
+      "required": ["version", "profile", "candidateCount", "fixedBundles", "candidates"],
+      "properties": {
+        "version": { "type": ["string", "null"] },
+        "profile": { "type": "string" },
+        "candidateCount": { "type": "integer", "minimum": 1 },
+        "fixedBundles": { "type": "array", "items": { "type": "string" } },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "spec", "version", "resolved"],
+            "properties": {
+              "name": { "type": "string" },
+              "spec": { "type": "string" },
+              "version": { "type": ["string", "null"] },
+              "resolved": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "required": ["kind", "command", "timeoutMs", "settleMs", "repeat"],
+      "properties": {
+        "kind": { "enum": ["config", "web", "command"] },
+        "command": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "timeoutMs": { "type": "integer", "minimum": 1 },
+        "settleMs": { "type": ["integer", "null"], "minimum": 0 },
+        "repeat": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "status",
+        "minimalFailingSet",
+        "oneMinimal",
+        "removalChecks",
+        "distinctConfigurationsTested",
+        "unresolvedConfigurations"
+      ],
+      "properties": {
+        "status": { "const": "minimal-failure-set-found" },
+        "minimalFailingSet": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "oneMinimal": { "type": "boolean" },
+        "removalChecks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["removed", "outcome"],
+            "properties": {
+              "removed": { "type": "string" },
+              "outcome": { "enum": ["pass", "fail", "unresolved"] }
+            }
+          }
+        },
+        "distinctConfigurationsTested": { "type": "integer", "minimum": 2 },
+        "unresolvedConfigurations": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "required": [
+        "sourceFingerprintBefore",
+        "sourceFingerprintAfter",
+        "sourceProfileUnchanged",
+        "credentialStoresCopied",
+        "sessionsCopied",
+        "packagesInstalled",
+        "isolatedAttempts",
+        "reportRedactionApplied",
+        "shadowLabKept",
+        "shadowLab"
+      ],
+      "properties": {
+        "sourceFingerprintBefore": { "type": "string" },
+        "sourceFingerprintAfter": { "type": "string" },
+        "sourceProfileUnchanged": { "type": "boolean" },
+        "credentialStoresCopied": { "type": "boolean" },
+        "sessionsCopied": { "type": "boolean" },
+        "packagesInstalled": { "type": "boolean" },
+        "isolatedAttempts": { "type": "boolean" },
+        "reportRedactionApplied": { "type": "boolean" },
+        "shadowLabKept": { "type": "boolean" },
+        "shadowLab": { "type": ["string", "null"] }
+      }
+    },
+    "trials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "activeBundles", "outcome", "attempts"],
+        "properties": {
+          "id": { "type": "integer", "minimum": 1 },
+          "activeBundles": { "type": "array", "items": { "type": "string" } },
+          "outcome": { "enum": ["pass", "fail", "unresolved"] },
+          "attempts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["pass", "reason", "exitCode", "signal", "durationMs", "stdout", "stderr"],
+              "properties": {
+                "pass": { "type": "boolean" },
+                "reason": { "type": "string" },
+                "exitCode": { "type": ["integer", "null"] },
+                "signal": { "type": ["string", "null"] },
+                "durationMs": { "type": "integer", "minimum": 0 },
+                "stdout": { "type": "string" },
+                "stderr": { "type": "string" },
+                "url": { "type": ["string", "null"] },
+                "httpStatus": { "type": ["integer", "null"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

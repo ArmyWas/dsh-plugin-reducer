@@ -1,0 +1,59 @@
+{
+  "name": "dsh-plugin-reducer",
+  "version": "0.1.0",
+  "description": "Find a 1-minimal failure-inducing set of DeepSeek Harness profile plugins without modifying the real profile.",
+  "type": "module",
+  "bin": {
+    "dsh-plugin-reducer": "./bin/dsh-plugin-reducer.js",
+    "dsh-reduce": "./bin/dsh-plugin-reducer.js"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./ddmin": "./src/ddmin.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "schemas",
+    "docs",
+    "README.md",
+    "README.zh-CN.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "SECURITY.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check:syntax": "node --check bin/dsh-plugin-reducer.js && node --check src/args.js && node --check src/ddmin.js && node --check src/dsh-command.js && node --check src/index.js && node --check src/probe.js && node --check src/profile-lab.js && node --check src/redact.js && node --check src/report.js",
+    "check": "npm run check:syntax && npm test",
+    "pack:check": "npm pack --dry-run",
+    "prepack": "npm run check"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "delta-debugging",
+    "plugin-debugging",
+    "minimal-reproduction"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArmyWas/dsh-plugin-reducer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArmyWas/dsh-plugin-reducer/issues"
+  },
+  "homepage": "https://github.com/ArmyWas/dsh-plugin-reducer#readme",
+  "author": "ArmyWas",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
