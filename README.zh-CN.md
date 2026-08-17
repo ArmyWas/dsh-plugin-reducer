@@ -148,6 +148,7 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 - [报告 JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [上游 RFC](docs/UPSTREAM_RFC.md)
 - [社区发布材料](docs/COMMUNITY_LAUNCH.md)
+- [GitHub 发布运行手册](docs/PUBLISH_RUNBOOK.md)
 - [官方 Discussion 定稿](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
 - [参与贡献](CONTRIBUTING.md)

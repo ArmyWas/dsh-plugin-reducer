@@ -163,6 +163,7 @@ replace them.
 - [Report JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [Upstream RFC](docs/UPSTREAM_RFC.md)
 - [Community launch kit](docs/COMMUNITY_LAUNCH.md)
+- [GitHub publication runbook](docs/PUBLISH_RUNBOOK.md)
 - [Official Discussion draft](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 release notes](docs/RELEASE_NOTES_v0.1.0.md)
 - [Contributing](CONTRIBUTING.md)
