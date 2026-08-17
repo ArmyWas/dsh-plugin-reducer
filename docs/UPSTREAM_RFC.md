@@ -2,6 +2,12 @@
 
 Status: proposal for community and maintainer discussion.
 
+The official repository's current
+[contribution policy](https://github.com/deepseek-ai/deepseek-harness/blob/master/CONTRIBUTING.md)
+states that external pull requests are not accepted. This document is therefore
+discussion material, not a prewritten core PR. Any upstream implementation
+should begin only after maintainer direction.
+
 ## Summary
 
 Add an official diagnostic path that can reduce a failing Harness profile to a

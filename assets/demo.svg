@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">dsh-plugin-reducer real Harness interaction test</title>
+  <desc id="desc">A terminal showing six configurations reduced to the interacting fixture-a and fixture-b pair.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#101b31"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="18" stdDeviation="25" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="680" fill="url(#background)"/>
+  <circle cx="1050" cy="80" r="230" fill="#7c3aed" opacity=".10"/>
+  <circle cx="80" cy="650" r="260" fill="#06b6d4" opacity=".08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="54" width="1060" height="572" rx="20" fill="#0b1220" stroke="#26334b" stroke-width="2"/>
+    <path d="M90 54h1020a20 20 0 0 1 20 20v48H70V74a20 20 0 0 1 20-20z" fill="#121c2e"/>
+    <circle cx="106" cy="88" r="8" fill="#fb7185"/>
+    <circle cx="132" cy="88" r="8" fill="#fbbf24"/>
+    <circle cx="158" cy="88" r="8" fill="#34d399"/>
+    <text x="600" y="95" text-anchor="middle" fill="#a9b7ce" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="18">dsh-plugin-reducer · real Harness rc.7</text>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20">
+    <text x="104" y="164" fill="#67e8f9">$</text>
+    <text x="132" y="164" fill="#d7e2f2">dsh-plugin-reducer --profile web --probe web</text>
+
+    <text x="104" y="210" fill="#94a3b8">#1</text>
+    <text x="154" y="210" fill="#fb7185" font-weight="700">FAIL</text>
+    <text x="244" y="210" fill="#cbd5e1">3 active</text>
+    <text x="390" y="210" fill="#94a3b8">fixture-a, fixture-b, fixture-c</text>
+
+    <text x="104" y="248" fill="#94a3b8">#2</text>
+    <text x="154" y="248" fill="#34d399" font-weight="700">PASS</text>
+    <text x="244" y="248" fill="#cbd5e1">0 active</text>
+    <text x="390" y="248" fill="#94a3b8">(none)</text>
+
+    <text x="104" y="286" fill="#94a3b8">#3</text>
+    <text x="154" y="286" fill="#34d399" font-weight="700">PASS</text>
+    <text x="244" y="286" fill="#cbd5e1">1 active</text>
+    <text x="390" y="286" fill="#94a3b8">fixture-c</text>
+
+    <text x="104" y="324" fill="#94a3b8">#4</text>
+    <text x="154" y="324" fill="#fb7185" font-weight="700">FAIL</text>
+    <text x="244" y="324" fill="#cbd5e1">2 active</text>
+    <text x="390" y="324" fill="#f8fafc">fixture-a, fixture-b</text>
+
+    <text x="104" y="362" fill="#94a3b8">#5</text>
+    <text x="154" y="362" fill="#34d399" font-weight="700">PASS</text>
+    <text x="244" y="362" fill="#cbd5e1">1 active</text>
+    <text x="390" y="362" fill="#94a3b8">fixture-b</text>
+
+    <text x="104" y="400" fill="#94a3b8">#6</text>
+    <text x="154" y="400" fill="#34d399" font-weight="700">PASS</text>
+    <text x="244" y="400" fill="#cbd5e1">1 active</text>
+    <text x="390" y="400" fill="#94a3b8">fixture-a</text>
+
+    <rect x="104" y="433" width="992" height="2" fill="#25344d"/>
+
+    <text x="104" y="482" fill="url(#accent)" font-size="24" font-weight="700">Minimal failing set (2)</text>
+    <text x="132" y="524" fill="#f8fafc">• dsh-reducer-fixture-a</text>
+    <text x="510" y="524" fill="#f8fafc">• dsh-reducer-fixture-b</text>
+    <text x="104" y="568" fill="#34d399">✓ Verified 1-minimal</text>
+    <text x="368" y="568" fill="#64748b">·</text>
+    <text x="392" y="568" fill="#a5b4fc">6 configurations tested</text>
+  </g>
+
+  <g font-family="Inter, Segoe UI, sans-serif" font-size="15" fill="#8190aa">
+    <text x="92" y="654">fresh shadow home per attempt</text>
+    <text x="600" y="654" text-anchor="middle">source profile unchanged</text>
+    <text x="1108" y="654" text-anchor="end">paths + common secrets scrubbed</text>
+  </g>
+</svg>

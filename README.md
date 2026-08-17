@@ -10,6 +10,8 @@ to reproduce it?**
 profile. It tests disposable shadow profiles, so it does not rewrite the real
 profile while searching.
 
+![A real rc.7 run reducing three candidate bundles to an interacting pair](assets/demo.png)
+
 It catches interaction failures that "disable plugins one by one" misses. If A
 works, B works, and A+B fails, the result is `{A, B}`.
 
@@ -161,6 +163,8 @@ replace them.
 - [Report JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [Upstream RFC](docs/UPSTREAM_RFC.md)
 - [Community launch kit](docs/COMMUNITY_LAUNCH.md)
+- [Official Discussion draft](docs/OFFICIAL_DISCUSSION.md)
+- [v0.1.0 release notes](docs/RELEASE_NOTES_v0.1.0.md)
 - [Contributing](CONTRIBUTING.md)
 
 DeepSeek Harness is a trademark of its respective owner. This project is not

@@ -8,6 +8,8 @@
 影子 profile 中自动测试插件组合，找出导致故障的 **1-最小插件集合**，不靠修改
 真实 profile 来试错。
 
+![在真实 rc.7 上将三个候选 bundle 缩减为一对交互插件](assets/demo.png)
+
 它尤其适合定位普通“逐个禁用”会漏掉的交互故障：A 单独正常，B 单独正常，A+B
 才崩，最终结果就是 `{A, B}`。
 
@@ -146,6 +148,8 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 - [报告 JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [上游 RFC](docs/UPSTREAM_RFC.md)
 - [社区发布材料](docs/COMMUNITY_LAUNCH.md)
+- [官方 Discussion 定稿](docs/OFFICIAL_DISCUSSION.md)
+- [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
 - [参与贡献](CONTRIBUTING.md)
 
 DeepSeek Harness 是其权利人的商标。本项目与 DeepSeek 无隶属或官方背书关系。

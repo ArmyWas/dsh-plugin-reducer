@@ -24,6 +24,11 @@ The review covered:
 No reviewed project matched the exact job. This is a time-bounded search result,
 not a claim that an unknown or later project cannot exist.
 
+The catalog explicitly accepts installable packages that declare `dsh.bundle`.
+This project intentionally remains an external CLI so it can work when the
+plugin tree cannot load; it therefore will not seek an awesome-list entry or use
+the `dsh-plugin` GitHub topic unless that eligibility rule changes.
+
 ## Closest existing work
 
 ### dsh-startup-guard
