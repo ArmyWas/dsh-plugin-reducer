@@ -1,0 +1,98 @@
+name: Real Harness field report
+description: Share a redacted real-world profile failure and the reducer result.
+title: "[Field report] "
+labels:
+  - field-report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping validate dsh-plugin-reducer outside its controlled fixture.
+
+        **Do not paste API keys, tokens, credentials, private source code, or an unreviewed DSH_HOME archive.** Review generated reports before uploading them.
+
+  - type: input
+    id: harness-version
+    attributes:
+      label: DeepSeek Harness version
+      description: For example, @deepseek-ai/dsh@0.1.0-rc.7.
+      placeholder: "@deepseek-ai/dsh@..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js version
+      placeholder: "v24.x.x"
+    validations:
+      required: true
+
+  - type: input
+    id: reducer-version
+    attributes:
+      label: Reducer version or commit
+      placeholder: "v0.1.0 or commit SHA"
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Failure symptom
+      description: What did Harness do, and what did you expect instead? Include only redacted output.
+      placeholder: "Harness failed during..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Reducer command
+      description: Remove or replace private paths and arguments before submitting.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: result
+    attributes:
+      label: Minimal set and verification result
+      description: Paste the summary or attach a manually reviewed, redacted JSON report.
+      placeholder: |
+        Minimal failure-inducing set:
+        - plugin-a
+        - plugin-b
+        Verified 1-minimal: yes
+    validations:
+      required: true
+
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: What happened after you disabled one reported member?
+      description: This helps distinguish a useful reduction from an unstable or unrelated failure.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I reviewed every pasted or attached artifact and removed secrets, credentials, private code, and identifying local paths.
+          required: true
+        - label: I understand that this is a public GitHub issue.
+          required: true

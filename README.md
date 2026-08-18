@@ -19,6 +19,8 @@ works, B works, and A+B fails, the result is `{A, B}`.
 > Node.js 24. The repository CI also targets Windows, macOS, and Linux on the
 > Node.js versions supported by Harness.
 
+Found a real profile failure? [Open a redacted field report](https://github.com/ArmyWas/dsh-plugin-reducer/issues/new?template=field-report.yml).
+
 ## Why this exists
 
 A profile can contain dozens of bundles. Startup guards can recover a broken
