@@ -17,6 +17,8 @@
 > `@deepseek-ai/dsh@0.1.0-rc.7` 完成真实启动验证；CI 面向 Windows、macOS、Linux
 > 和 Harness 支持的 Node.js 版本。
 
+遇到了真实的 profile 故障？欢迎提交一份[经过人工检查和脱敏的现场报告](https://github.com/ArmyWas/dsh-plugin-reducer/issues/new?template=field-report.yml)。
+
 ## 为什么值得做
 
 现有生态里已有启动保护、医生、复现信息导出、插件管理等优秀项目，但它们没有
