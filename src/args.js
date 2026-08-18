@@ -1,4 +1,4 @@
-export const VERSION = '0.1.0'
+export const VERSION = '0.2.0'
 
 export const HELP = `dsh-plugin-reducer ${VERSION}
 
@@ -22,6 +22,7 @@ Options:
   --report <path>        Write a secret-scrubbed JSON report
   --force                Allow --report to overwrite an existing file
   --keep-lab             Keep a final shadow DSH_HOME with the minimal set
+  --list-candidates      List out-of-tree candidate bundles and exit
   --quiet                Hide per-trial progress
   -h, --help             Show this help
   -V, --version          Show the version
@@ -36,6 +37,7 @@ Examples:
   dsh-plugin-reducer --profile web --probe web
   dsh-plugin-reducer --profile web --report reducer-report.json
   dsh-plugin-reducer --profile web -- node reproduce.mjs
+  dsh-plugin-reducer --list-candidates --profile web
 `
 
 function integer(value, option, minimum = 1) {
@@ -63,12 +65,14 @@ export function parseArgs(argv) {
     report: undefined,
     force: false,
     keepLab: false,
+    listCandidates: false,
     quiet: false,
     help: false,
     version: false,
     command,
   }
   let probeWasExplicit = false
+  const seen = new Set()
 
   const takeValue = (index, option, inline) => {
     if (inline !== undefined) return { value: inline, next: index }
@@ -81,11 +85,13 @@ export function parseArgs(argv) {
     const equals = raw.indexOf('=')
     const option = equals === -1 ? raw : raw.slice(0, equals)
     const inline = equals === -1 ? undefined : raw.slice(equals + 1)
+    seen.add(option)
 
     if (option === '-h' || option === '--help') options.help = true
     else if (option === '-V' || option === '--version') options.version = true
     else if (option === '--force') options.force = true
     else if (option === '--keep-lab') options.keepLab = true
+    else if (option === '--list-candidates') options.listCandidates = true
     else if (option === '--quiet') options.quiet = true
     else if (['--profile', '--dsh-home', '--dsh', '--probe', '--timeout', '--settle', '--repeat', '--max-trials', '--report'].includes(option)) {
       const taken = takeValue(index, option, inline)
@@ -117,6 +123,26 @@ export function parseArgs(argv) {
   }
   if (options.probe === 'command' && command.length === 0 && !options.help && !options.version) {
     throw new Error('--probe command requires a command after --')
+  }
+  if (options.listCandidates && !options.help && !options.version) {
+    const conflict = [
+      '--dsh',
+      '--probe',
+      '--timeout',
+      '--settle',
+      '--repeat',
+      '--max-trials',
+      '--report',
+      '--force',
+      '--keep-lab',
+      '--quiet',
+    ].find(option => seen.has(option))
+    if (conflict !== undefined) {
+      throw new Error(`--list-candidates cannot be combined with ${conflict}`)
+    }
+    if (command.length > 0) {
+      throw new Error('--list-candidates cannot be combined with a command after --')
+    }
   }
   return options
 }

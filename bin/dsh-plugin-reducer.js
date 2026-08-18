@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { HELP, VERSION, parseArgs } from '../src/args.js'
-import { ReducerError, reduceProfile, TrialLimitError } from '../src/index.js'
+import { ReducerError, listCandidates, reduceProfile, TrialLimitError } from '../src/index.js'
 import { writeReport } from '../src/report.js'
 
 function formatSet(items) {
@@ -31,7 +31,15 @@ try {
 if (options !== undefined) {
   if (options.help) process.stdout.write(HELP)
   else if (options.version) process.stdout.write(`${VERSION}\n`)
-  else {
+  else if (options.listCandidates) {
+    try {
+      const candidates = await listCandidates({ dshHome: options.dshHome, profile: options.profile })
+      for (const candidate of candidates) process.stdout.write(`${candidate}\n`)
+    } catch (error) {
+      printError(error)
+      process.exitCode = 1
+    }
+  } else {
     try {
       const result = await reduceProfile({ ...options, cwd: process.cwd() }, {
         onLab: event => {

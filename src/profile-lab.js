@@ -125,6 +125,15 @@ export async function inspectProfile({ dshHome: explicitHome, profile }) {
   }
 }
 
+/**
+ * Return the out-of-tree bundles a reduction would consider without creating a
+ * shadow home or resolving a dsh executable.
+ */
+export async function listCandidates(options) {
+  const { candidates } = await inspectProfile(options)
+  return candidates
+}
+
 async function copyIfPresent(source, target) {
   if (!await exists(source)) return false
   await mkdir(dirname(target), { recursive: true })

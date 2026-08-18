@@ -218,4 +218,4 @@ export async function reduceProfile(options, hooks = {}) {
 }
 
 export { Outcome, TrialLimitError } from './ddmin.js'
-export { inspectProfile, resolveDshHome } from './profile-lab.js'
+export { inspectProfile, listCandidates, resolveDshHome } from './profile-lab.js'
