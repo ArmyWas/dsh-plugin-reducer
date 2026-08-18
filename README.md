@@ -61,6 +61,27 @@ dsh-plugin-reducer --dsh /path/to/dsh --profile web --probe web
 
 The tool reads `DSH_HOME` from the environment, or accepts `--dsh-home`.
 
+## List candidates
+
+Before spending probe runs, see exactly which out-of-tree bundles the reducer
+would consider. `--list-candidates` reads the profile manifest, prints one
+bundle name per line, and exits 0:
+
+```sh
+dsh-plugin-reducer --list-candidates --profile web
+```
+
+```text
+plugin-a
+plugin-b
+plugin-c
+```
+
+This is a read-only listing: it does not create a shadow `DSH_HOME`, does not
+run any probe, and does not require the `dsh` executable to be installed or on
+`PATH`. Probe-only options and a command after `--` are rejected instead of
+being silently ignored.
+
 ## What a run does
 
 1. Reads `$DSH_HOME/profiles/<name>/package.json`.
@@ -161,6 +182,7 @@ replace them.
 ## Project evidence and design
 
 - [Real Harness interaction test](docs/REAL_HARNESS_TEST.md)
+- [Real Harness dogfood report for `--list-candidates`](docs/HARNESS_DOGFOOD.md)
 - [Product brief](docs/PRODUCT.md)
 - [Report JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [Upstream RFC](docs/UPSTREAM_RFC.md)
@@ -168,6 +190,7 @@ replace them.
 - [GitHub publication runbook](docs/PUBLISH_RUNBOOK.md)
 - [Official Discussion draft](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 release notes](docs/RELEASE_NOTES_v0.1.0.md)
+- [v0.2.0 release notes](docs/RELEASE_NOTES_v0.2.0.md)
 - [Contributing](CONTRIBUTING.md)
 
 DeepSeek Harness is a trademark of its respective owner. This project is not

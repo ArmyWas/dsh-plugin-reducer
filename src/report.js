@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
+import { VERSION } from './args.js'
 import { redactValue } from './redact.js'
 
 export function buildReport(data, redactionOptions) {
@@ -7,7 +8,7 @@ export function buildReport(data, redactionOptions) {
     schemaVersion: 1,
     tool: {
       name: 'dsh-plugin-reducer',
-      version: '0.1.0',
+      version: VERSION,
       algorithm: 'ddmin-plus-one-minimality-check',
     },
     generatedAt: new Date().toISOString(),

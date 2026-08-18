@@ -63,9 +63,11 @@ For the first public milestone:
 ## Roadmap, gated by evidence
 
 1. **0.1:** config/Web/custom probes, 1-minimal sets, scrubbed reports.
-2. **0.2:** ordered-prefix reduction for order-sensitive layer bugs and a report
+2. **0.2:** a zero-probe candidate preview, added after hands-on use showed that
+   users need to verify scope before starting a reduction.
+3. **0.3:** ordered-prefix reduction for order-sensitive layer bugs and a report
    viewer, only after real reports show demand.
-3. **0.3:** optional session-level oracle adapter and CI reproduction action.
+4. **0.4:** optional session-level oracle adapter and CI reproduction action.
 4. **Upstream:** standardize profile inspection and diagnostic report metadata;
    consider an official `dsh plugin reduce` command after cross-platform usage.
 

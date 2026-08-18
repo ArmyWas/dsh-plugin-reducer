@@ -57,6 +57,25 @@ dsh-plugin-reducer --dsh /path/to/dsh --profile web --probe web
 
 工具默认读取环境变量中的 `DSH_HOME`，也可显式传入 `--dsh-home`。
 
+## 列出候选插件
+
+在消耗探针运行次数之前，先看看 reducer 会考虑哪些树外插件。
+`--list-candidates` 读取 profile manifest，每行打印一个 bundle 名称并以 0 退出：
+
+```sh
+dsh-plugin-reducer --list-candidates --profile web
+```
+
+```text
+plugin-a
+plugin-b
+plugin-c
+```
+
+这是只读操作：它不创建影子 `DSH_HOME`，不运行任何探针，也不要求 `dsh` 可执行
+文件已安装或位于 `PATH` 中。探针专用参数和 `--` 后的命令会直接被拒绝，不会被
+悄悄忽略。
+
 ## 一次运行做了什么
 
 1. 读取 `$DSH_HOME/profiles/<name>/package.json`。
@@ -146,6 +165,7 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 ## 证据与设计资料
 
 - [真实 Harness 交互故障测试](docs/REAL_HARNESS_TEST.md)
+- [使用真实 Harness 开发 `--list-candidates` 的实测报告](docs/HARNESS_DOGFOOD.md)
 - [产品说明](docs/PRODUCT.md)
 - [报告 JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
 - [上游 RFC](docs/UPSTREAM_RFC.md)
@@ -153,6 +173,7 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 - [GitHub 发布运行手册](docs/PUBLISH_RUNBOOK.md)
 - [官方 Discussion 定稿](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
+- [v0.2.0 发布说明](docs/RELEASE_NOTES_v0.2.0.md)
 - [参与贡献](CONTRIBUTING.md)
 
 DeepSeek Harness 是其权利人的商标。本项目与 DeepSeek 无隶属或官方背书关系。
