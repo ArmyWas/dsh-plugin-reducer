@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-reducer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Find a 1-minimal failure-inducing set of DeepSeek Harness profile plugins without modifying the real profile.",
   "type": "module",
   "bin": {
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "test": "node --test test/*.test.js",
-    "check:syntax": "node --check bin/dsh-plugin-reducer.js && node --check src/args.js && node --check src/ddmin.js && node --check src/dsh-command.js && node --check src/index.js && node --check src/probe.js && node --check src/profile-lab.js && node --check src/redact.js && node --check src/report.js",
+    "check:syntax": "node --check bin/dsh-plugin-reducer.js && node --check src/args.js && node --check src/ddmin.js && node --check src/dsh-command.js && node --check src/index.js && node --check src/machine-output.js && node --check src/probe.js && node --check src/profile-lab.js && node --check src/redact.js && node --check src/report.js",
     "check": "npm run check:syntax && npm test",
     "pack:check": "npm pack --dry-run",
     "prepack": "npm run check"

@@ -61,6 +61,29 @@ dsh-plugin-reducer --dsh /path/to/dsh --profile web --probe web
 
 The tool reads `DSH_HOME` from the environment, or accepts `--dsh-home`.
 
+## Machine integration
+
+Use `--json` when another tool needs a stable contract rather than terminal
+copy. The command writes exactly one JSON envelope to stdout, suppresses
+progress output, and keeps the existing exit-code semantics:
+
+```sh
+dsh-plugin-reducer --json --dsh-home /path/to/.dsh \
+  --profile web --probe web
+```
+
+Successful reductions expose the existing scrubbed report at
+`report.result.minimalFailingSet`. Invalid arguments exit `2`; execution or
+reduction failures exit `1`; both still return a parseable envelope with
+`ok: false` and a stable `error.code`. `--list-candidates --json` uses the same
+envelope family. The schemas ship in `schemas/`.
+
+For Node integrations, importing `reduceProfile` directly avoids executable
+discovery altogether. See [the integration contract](docs/INTEGRATION.md) for
+CLI and library examples, exit codes, cross-platform temporary paths, and the
+rules that keep Windows adapters free of `which`, shell interpolation, and
+hard-coded `/tmp` paths.
+
 ## List candidates
 
 Before spending probe runs, see exactly which out-of-tree bundles the reducer
@@ -185,12 +208,15 @@ replace them.
 - [Real Harness dogfood report for `--list-candidates`](docs/HARNESS_DOGFOOD.md)
 - [Product brief](docs/PRODUCT.md)
 - [Report JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
+- [Machine-output JSON Schema](schemas/dsh-plugin-reducer-machine-output.schema.json)
+- [Integration contract](docs/INTEGRATION.md)
 - [Upstream RFC](docs/UPSTREAM_RFC.md)
 - [Community launch kit](docs/COMMUNITY_LAUNCH.md)
 - [GitHub publication runbook](docs/PUBLISH_RUNBOOK.md)
 - [Official Discussion draft](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 release notes](docs/RELEASE_NOTES_v0.1.0.md)
 - [v0.2.0 release notes](docs/RELEASE_NOTES_v0.2.0.md)
+- [v0.3.0 release notes](docs/RELEASE_NOTES_v0.3.0.md)
 - [Contributing](CONTRIBUTING.md)
 
 DeepSeek Harness is a trademark of its respective owner. This project is not
