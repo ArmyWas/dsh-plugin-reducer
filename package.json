@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "test": "node --test test/*.test.js",
-    "check:syntax": "node --check bin/dsh-plugin-reducer.js && node --check src/args.js && node --check src/ddmin.js && node --check src/dsh-command.js && node --check src/index.js && node --check src/machine-output.js && node --check src/probe.js && node --check src/profile-lab.js && node --check src/redact.js && node --check src/report.js && node --check examples/node-consumer/index.mjs",
+    "check:syntax": "node --check bin/dsh-plugin-reducer.js && node --check src/args.js && node --check src/ddmin.js && node --check src/dsh-command.js && node --check src/index.js && node --check src/machine-output.js && node --check src/probe.js && node --check src/profile-lab.js && node --check src/redact.js && node --check src/report.js && node --check examples/node-consumer/index.mjs && node --check scripts/init-upstream-profile.mjs",
     "check": "npm run check:syntax && npm test",
     "pack:check": "npm pack --dry-run",
     "prepack": "npm run check"
