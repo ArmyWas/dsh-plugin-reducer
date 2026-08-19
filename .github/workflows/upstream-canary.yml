@@ -1,0 +1,43 @@
+name: Upstream canary
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  next-profile-layout:
+    name: dsh next / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm install --global pnpm@11.7.0
+      - run: npm install --no-save --package-lock=false @deepseek-ai/dsh@next
+      - name: Initialize a real next profile and read it through the reducer
+        shell: pwsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'dsh-canary'
+          npx --no-install dsh --profile web --dump-default-config | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'dsh next could not initialize the web profile' }
+
+          $output = node bin/dsh-plugin-reducer.js --list-candidates --json --profile web
+          if ($LASTEXITCODE -ne 0) { throw 'reducer could not read the dsh next profile' }
+          $result = $output | ConvertFrom-Json
+          if (-not $result.ok -or $result.operation -ne 'list-candidates') {
+            throw "unexpected reducer envelope: $output"
+          }
+
+          Write-Host "dsh next profile read successfully; candidate count: $($result.candidates.Count)"

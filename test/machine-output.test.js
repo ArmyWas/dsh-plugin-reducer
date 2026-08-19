@@ -4,10 +4,24 @@ import { readFile, rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
+import Ajv2020 from 'ajv/dist/2020.js'
+import addFormats from 'ajv-formats'
 import { createFixtureHome } from './helpers.js'
 
 const binPath = fileURLToPath(new URL('../bin/dsh-plugin-reducer.js', import.meta.url))
 const oracle = fileURLToPath(new URL('./fixtures/oracle.js', import.meta.url))
+const reportSchema = JSON.parse(await readFile(new URL(
+  '../schemas/dsh-plugin-reducer-report.schema.json',
+  import.meta.url,
+), 'utf8'))
+const machineSchema = JSON.parse(await readFile(new URL(
+  '../schemas/dsh-plugin-reducer-machine-output.schema.json',
+  import.meta.url,
+), 'utf8'))
+const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false })
+addFormats(ajv)
+ajv.addSchema(reportSchema)
+const validateMachineOutput = ajv.compile(machineSchema)
 
 function run(args, options = {}) {
   return spawnSync(process.execPath, [binPath, ...args], {
@@ -20,8 +34,25 @@ function run(args, options = {}) {
 function parseOnlyLine(result) {
   assert.equal(result.stderr, '')
   assert.equal(result.stdout.trim().split(/\r?\n/).length, 1)
-  return JSON.parse(result.stdout)
+  const output = JSON.parse(result.stdout)
+  assert.equal(
+    validateMachineOutput(output),
+    true,
+    ajv.errorsText(validateMachineOutput.errors, { separator: '\n' }),
+  )
+  return output
 }
+
+test('published machine schema rejects a successful reduction without a report', () => {
+  const valid = validateMachineOutput({
+    schemaVersion: 1,
+    tool: { name: 'dsh-plugin-reducer', version: '0.3.0' },
+    operation: 'reduce',
+    ok: true,
+  })
+  assert.equal(valid, false)
+  assert.match(ajv.errorsText(validateMachineOutput.errors), /must have required property 'report'/)
+})
 
 test('--list-candidates --json emits a stable envelope without dsh', async t => {
   const fixture = await createFixtureHome()

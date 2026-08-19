@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Put the verified GitHub release installation path in the primary quick start.
+- Add a pinned, copyable Node consumer example for downstream integrations.
+- Validate every tested machine envelope against the published JSON Schemas.
+- Add weekly dependency maintenance and a scheduled `@deepseek-ai/dsh@next`
+  profile-layout canary.
+- Add repository contribution and conduct templates.
+
 ## 0.3.0 - 2026-08-19
 
 - Add a stable `--json` envelope for reduction, candidate listing, and failures.

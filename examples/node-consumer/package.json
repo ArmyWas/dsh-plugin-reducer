@@ -1,0 +1,12 @@
+{
+  "name": "dsh-plugin-reducer-node-consumer-example",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "dsh-plugin-reducer": "https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz"
+  }
+}
