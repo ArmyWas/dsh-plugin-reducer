@@ -25,7 +25,10 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm install --global pnpm@11.7.0
-      - run: npm install --no-save --package-lock=false @deepseek-ai/dsh@next
+      - name: Install the prebuilt Harness next package without dependency scripts
+        run: >-
+          npm install --ignore-scripts --no-audit --no-fund
+          --no-save --package-lock=false @deepseek-ai/dsh@next
       - name: Initialize a real next profile and read it through the reducer
         shell: pwsh
         run: |
