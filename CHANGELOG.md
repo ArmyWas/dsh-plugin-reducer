@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 - 2026-08-19
+
+- Add a stable `--json` envelope for reduction, candidate listing, and failures.
+- Keep JSON stdout parseable by suppressing human progress in machine mode.
+- Redact local paths from machine-readable error messages.
+- Publish a JSON Schema and cross-platform library/CLI integration contract.
+- Add end-to-end tests for success, argument errors, execution errors, report
+  parity, and operation without `dsh` on `PATH`.
+
 ## 0.2.0 - 2026-08-18
 
 - Add `--list-candidates` to preview the exact out-of-tree bundle set without

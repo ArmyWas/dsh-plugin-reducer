@@ -57,6 +57,27 @@ dsh-plugin-reducer --dsh /path/to/dsh --profile web --probe web
 
 工具默认读取环境变量中的 `DSH_HOME`，也可显式传入 `--dsh-home`。
 
+## 机器集成
+
+其他工具需要稳定接口而不是终端文案时，请使用 `--json`。命令只向
+stdout 写一行 JSON 信封、隐藏进度输出，并保留现有退出码语义：
+
+```sh
+dsh-plugin-reducer --json --dsh-home /path/to/.dsh \
+  --profile web --probe web
+```
+
+成功时，脱敏报告位于 `report`，最小故障集位于
+`report.result.minimalFailingSet`。参数错误退出 `2`；执行或归约失败退出
+`1`；两种失败仍会返回可解析的 `ok: false` 信封与稳定的
+`error.code`。`--list-candidates --json` 使用同一信封系列，JSON Schema
+随包发布在 `schemas/`。
+
+Node 集成可以直接导入 `reduceProfile`，完全绕开可执行文件发现。CLI、
+库接口、退出码、跨平台临时目录和 Windows 注意事项见
+[集成契约](docs/INTEGRATION.md)。集成端不应依赖 `which`、shell 字符串拼接
+或硬编码 `/tmp`。
+
 ## 列出候选插件
 
 在消耗探针运行次数之前，先看看 reducer 会考虑哪些树外插件。
@@ -168,12 +189,15 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 - [使用真实 Harness 开发 `--list-candidates` 的实测报告](docs/HARNESS_DOGFOOD.md)
 - [产品说明](docs/PRODUCT.md)
 - [报告 JSON Schema](schemas/dsh-plugin-reducer-report.schema.json)
+- [机器输出 JSON Schema](schemas/dsh-plugin-reducer-machine-output.schema.json)
+- [集成契约](docs/INTEGRATION.md)
 - [上游 RFC](docs/UPSTREAM_RFC.md)
 - [社区发布材料](docs/COMMUNITY_LAUNCH.md)
 - [GitHub 发布运行手册](docs/PUBLISH_RUNBOOK.md)
 - [官方 Discussion 定稿](docs/OFFICIAL_DISCUSSION.md)
 - [v0.1.0 发布说明](docs/RELEASE_NOTES_v0.1.0.md)
 - [v0.2.0 发布说明](docs/RELEASE_NOTES_v0.2.0.md)
+- [v0.3.0 发布说明](docs/RELEASE_NOTES_v0.3.0.md)
 - [参与贡献](CONTRIBUTING.md)
 
 DeepSeek Harness 是其权利人的商标。本项目与 DeepSeek 无隶属或官方背书关系。

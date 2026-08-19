@@ -16,10 +16,24 @@ test('rejects conflicting probe forms', () => {
 })
 
 test('parses --list-candidates as a read-only listing mode', () => {
-  const options = parseArgs(['--list-candidates', '--profile', 'work'])
+  const options = parseArgs(['--list-candidates', '--profile', 'work', '--json'])
   assert.equal(options.listCandidates, true)
   assert.equal(options.profile, 'work')
+  assert.equal(options.json, true)
 })
+
+test('parses --json for a reduction run', () => {
+  assert.equal(parseArgs(['--json']).json, true)
+})
+
+for (const informationalOption of ['--help', '--version']) {
+  test(`--json rejects ${informationalOption}`, () => {
+    assert.throws(
+      () => parseArgs(['--json', informationalOption]),
+      new RegExp(`cannot be combined with ${informationalOption}`),
+    )
+  })
+}
 
 test('--list-candidates defaults to the web profile', () => {
   assert.equal(parseArgs(['--list-candidates']).profile, 'web')

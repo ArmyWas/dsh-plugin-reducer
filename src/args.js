@@ -1,4 +1,4 @@
-export const VERSION = '0.2.0'
+export const VERSION = '0.3.0'
 
 export const HELP = `dsh-plugin-reducer ${VERSION}
 
@@ -23,6 +23,7 @@ Options:
   --force                Allow --report to overwrite an existing file
   --keep-lab             Keep a final shadow DSH_HOME with the minimal set
   --list-candidates      List out-of-tree candidate bundles and exit
+  --json                 Emit one stable JSON envelope on stdout
   --quiet                Hide per-trial progress
   -h, --help             Show this help
   -V, --version          Show the version
@@ -36,8 +37,9 @@ Probe semantics:
 Examples:
   dsh-plugin-reducer --profile web --probe web
   dsh-plugin-reducer --profile web --report reducer-report.json
+  dsh-plugin-reducer --profile web --probe web --json
   dsh-plugin-reducer --profile web -- node reproduce.mjs
-  dsh-plugin-reducer --list-candidates --profile web
+  dsh-plugin-reducer --list-candidates --profile web --json
 `
 
 function integer(value, option, minimum = 1) {
@@ -66,6 +68,7 @@ export function parseArgs(argv) {
     force: false,
     keepLab: false,
     listCandidates: false,
+    json: false,
     quiet: false,
     help: false,
     version: false,
@@ -92,6 +95,7 @@ export function parseArgs(argv) {
     else if (option === '--force') options.force = true
     else if (option === '--keep-lab') options.keepLab = true
     else if (option === '--list-candidates') options.listCandidates = true
+    else if (option === '--json') options.json = true
     else if (option === '--quiet') options.quiet = true
     else if (['--profile', '--dsh-home', '--dsh', '--probe', '--timeout', '--settle', '--repeat', '--max-trials', '--report'].includes(option)) {
       const taken = takeValue(index, option, inline)
@@ -124,6 +128,8 @@ export function parseArgs(argv) {
   if (options.probe === 'command' && command.length === 0 && !options.help && !options.version) {
     throw new Error('--probe command requires a command after --')
   }
+  if (options.json && options.help) throw new Error('--json cannot be combined with --help')
+  if (options.json && options.version) throw new Error('--json cannot be combined with --version')
   if (options.listCandidates && !options.help && !options.version) {
     const conflict = [
       '--dsh',
