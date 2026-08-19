@@ -35,7 +35,19 @@ set and a scrubbed JSON report suitable for an issue.
 
 ## Quick start
 
-From a source checkout:
+Install the verified, prebuilt GitHub release — no clone or local build is
+required:
+
+```sh
+npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+dsh-plugin-reducer --profile web --probe web --report reducer-report.json
+```
+
+Remove it with `npm uninstall --global dsh-plugin-reducer`. The package is not
+published to the npm registry yet, so prefer the pinned release URL over an
+unversioned `npx` command.
+
+For source development:
 
 ```sh
 git clone https://github.com/ArmyWas/dsh-plugin-reducer.git
@@ -44,13 +56,6 @@ npm install
 npm test
 npm link
 dsh-plugin-reducer --profile web --probe web --report reducer-report.json
-```
-
-After an npm release, the same run can use `npx`:
-
-```sh
-npx dsh-plugin-reducer@latest --profile web --probe web \
-  --report reducer-report.json
 ```
 
 If Harness lives outside `PATH`, point to it explicitly:
@@ -82,7 +87,8 @@ For Node integrations, importing `reduceProfile` directly avoids executable
 discovery altogether. See [the integration contract](docs/INTEGRATION.md) for
 CLI and library examples, exit codes, cross-platform temporary paths, and the
 rules that keep Windows adapters free of `which`, shell interpolation, and
-hard-coded `/tmp` paths.
+hard-coded `/tmp` paths. A complete pinned consumer project is available in
+[`examples/node-consumer`](examples/node-consumer/README.md).
 
 ## List candidates
 

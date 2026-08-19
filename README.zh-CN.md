@@ -31,7 +31,17 @@
 
 ## 快速开始
 
-从源码目录运行：
+直接安装经过验证的 GitHub Release，无需克隆仓库或本地构建：
+
+```sh
+npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+dsh-plugin-reducer --profile web --probe web --report reducer-report.json
+```
+
+卸载命令是 `npm uninstall --global dsh-plugin-reducer`。当前尚未发布到 npm
+registry，因此请使用固定版本的 Release 地址，不要使用未固定的 `npx` 命令。
+
+参与源码开发时：
 
 ```sh
 git clone https://github.com/ArmyWas/dsh-plugin-reducer.git
@@ -40,13 +50,6 @@ npm install
 npm test
 npm link
 dsh-plugin-reducer --profile web --probe web --report reducer-report.json
-```
-
-npm 发布后可直接使用：
-
-```sh
-npx dsh-plugin-reducer@latest --profile web --probe web \
-  --report reducer-report.json
 ```
 
 如果 `dsh` 不在 `PATH` 中：
@@ -76,7 +79,8 @@ dsh-plugin-reducer --json --dsh-home /path/to/.dsh \
 Node 集成可以直接导入 `reduceProfile`，完全绕开可执行文件发现。CLI、
 库接口、退出码、跨平台临时目录和 Windows 注意事项见
 [集成契约](docs/INTEGRATION.md)。集成端不应依赖 `which`、shell 字符串拼接
-或硬编码 `/tmp`。
+或硬编码 `/tmp`。可直接复制运行的固定版本示例位于
+[`examples/node-consumer`](examples/node-consumer/README.md)。
 
 ## 列出候选插件
 
