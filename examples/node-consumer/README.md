@@ -1,7 +1,7 @@
 # Node consumer example
 
 This is a deliberately small downstream project that installs the pinned,
-verified v0.3.0 release and consumes the public library API. It never modifies
+verified v0.3.1 release and consumes the public library API. It never modifies
 the source Harness profile; the reducer creates disposable shadow profiles for
 its probes.
 

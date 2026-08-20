@@ -46,7 +46,7 @@ function parseOnlyLine(result) {
 test('published machine schema rejects a successful reduction without a report', () => {
   const valid = validateMachineOutput({
     schemaVersion: 1,
-    tool: { name: 'dsh-plugin-reducer', version: '0.3.0' },
+    tool: { name: 'dsh-plugin-reducer', version: '0.3.1' },
     operation: 'reduce',
     ok: true,
   })
@@ -69,7 +69,7 @@ test('--list-candidates --json emits a stable envelope without dsh', async t => 
   assert.equal(result.status, 0, result.stderr)
   assert.deepEqual(parseOnlyLine(result), {
     schemaVersion: 1,
-    tool: { name: 'dsh-plugin-reducer', version: '0.3.0' },
+    tool: { name: 'dsh-plugin-reducer', version: '0.3.1' },
     operation: 'list-candidates',
     ok: true,
     profile: 'web',

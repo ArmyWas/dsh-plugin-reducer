@@ -7,6 +7,6 @@
     "start": "node index.mjs"
   },
   "dependencies": {
-    "dsh-plugin-reducer": "https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz"
+    "dsh-plugin-reducer": "https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.1/dsh-plugin-reducer-0.3.1.tgz"
   }
 }

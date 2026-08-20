@@ -61,18 +61,21 @@ until the stable-release gates are met.
 
 ## 6. npm registry publication
 
-The package declares public access and provenance. Before the first npm publish:
+The npm package is connected to `.github/workflows/publish.yml` as its trusted
+GitHub publisher. Publishing a GitHub Release runs the release gates and uses
+short-lived OIDC credentials; do not add a long-lived `NPM_TOKEN` secret.
 
-- authenticate the intended npm owner with two-factor authentication or a
-  configured trusted publisher;
-- confirm `npm whoami` and `npm view dsh-plugin-reducer` target the intended
-  account/name;
-- publish the exact reviewed commit/artifact with provenance;
-- verify the registry integrity and run a disposable `npx --package` smoke test;
-- only then replace README GitHub-tarball instructions with the npm command.
+- A prerelease is published under npm's `next` tag.
+- A non-prerelease is published under `latest`, so create one only after every
+  condition in `RELEASE_CRITERIA.md` is met.
+- The workflow verifies that `v<version>` exactly matches `package.json` before
+  publishing.
+- Public packages published through the trusted workflow receive npm
+  provenance automatically.
 
-Until those checks succeed, the pinned GitHub Release is the supported install
-source. Never claim an npm release before the registry returns it publicly.
+After publication, verify the registry integrity and run a disposable
+`npx --package dsh-plugin-reducer@next` smoke test. Never claim an npm version
+before the registry returns it publicly.
 
 ## 7. Post-publication checks
 

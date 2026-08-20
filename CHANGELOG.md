@@ -2,12 +2,19 @@
 
 ## Unreleased
 
+## 0.3.1 - 2026-08-21
+
 - Put the verified GitHub release installation path in the primary quick start.
 - Add a pinned, copyable Node consumer example for downstream integrations.
 - Validate every tested machine envelope against the published JSON Schemas.
 - Add weekly dependency maintenance and a scheduled
   `@deepseek-ai/dsh-app-boot@next` profile-layout canary.
 - Add repository contribution and conduct templates.
+- Clarify that the reducer is an external companion CLI rather than an
+  installable Harness bundle, and publish the official maintainer discussion.
+- Add an OIDC trusted-publishing workflow. New prereleases are published to the
+  npm `next` channel with automatically generated provenance; a future stable
+  release advances `latest` only after the independent field-evidence gate.
 
 ## 0.3.0 - 2026-08-19
 

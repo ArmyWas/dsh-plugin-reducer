@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-reducer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Find a 1-minimal failure-inducing set of DeepSeek Harness profile plugins without modifying the real profile.",
   "type": "module",
   "bin": {

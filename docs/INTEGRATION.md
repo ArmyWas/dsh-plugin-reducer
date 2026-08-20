@@ -3,18 +3,20 @@
 `dsh-plugin-reducer` supports two stable integration surfaces. Prefer the
 library API from Node.js. Use the CLI JSON envelope from other runtimes.
 
-## Install from the verified GitHub release
+## Install the pinned preview
 
-Until an npm registry release exists, pin the GitHub release asset rather than
-calling an unversioned package name through `npx`:
+Pin the exact npm version rather than calling an unversioned package name:
 
 ```sh
-npm install --save-exact \
-  https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+npm install --save-exact dsh-plugin-reducer@0.3.1
 ```
 
-The release also publishes a `.sha256` file. Consumers that vendor the asset
-should verify it before installation.
+Consumers that vendor artifacts can instead use the matching GitHub Release
+URL and verify its published `.sha256` file:
+
+```text
+https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.1/dsh-plugin-reducer-0.3.1.tgz
+```
 
 ## Node library API
 
@@ -53,7 +55,7 @@ Success:
 ```json
 {
   "schemaVersion": 1,
-  "tool": { "name": "dsh-plugin-reducer", "version": "0.3.0" },
+  "tool": { "name": "dsh-plugin-reducer", "version": "0.3.1" },
   "operation": "reduce",
   "ok": true,
   "report": { "result": { "minimalFailingSet": ["plugin-a"] } }
@@ -65,7 +67,7 @@ Failure:
 ```json
 {
   "schemaVersion": 1,
-  "tool": { "name": "dsh-plugin-reducer", "version": "0.3.0" },
+  "tool": { "name": "dsh-plugin-reducer", "version": "0.3.1" },
   "operation": "reduce",
   "ok": false,
   "error": { "code": "FULL_SET_PASSES", "message": "..." }
