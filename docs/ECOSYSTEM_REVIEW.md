@@ -1,6 +1,7 @@
 # Ecosystem review
 
-Review date: 2026-08-17.
+Initial review: 2026-08-17. Refreshed: 2026-08-21 against Harness `next`
+(`0.1.0-rc.8`) and current public ecosystem indexes.
 
 ## Question
 
@@ -21,13 +22,16 @@ The review covered:
   `dsh-ddmin`, and related terms.
 - Public descriptions and source trees of the closest projects below.
 
-No reviewed project matched the exact job. This is a time-bounded search result,
-not a claim that an unknown or later project cannot exist.
+No reviewed project matched the exact job, and the refreshed official source
+still contains no ddmin/minimal-failing-plugin implementation. This remains a
+time-bounded search result, not a claim that an unknown or later project cannot
+exist.
 
-The catalog explicitly accepts installable packages that declare `dsh.bundle`.
-This project intentionally remains an external CLI so it can work when the
-plugin tree cannot load; it therefore will not seek an awesome-list entry or use
-the `dsh-plugin` GitHub topic unless that eligibility rule changes.
+The community catalog now indexes the repository but correctly excludes it from
+its downstream installable-plugin market: this project intentionally remains an
+external CLI so it can work when the plugin tree cannot load. The repository
+therefore does not use the `dsh-plugin` GitHub topic and should be described as
+Harness companion tooling rather than as a `dsh.bundle` package.
 
 ## Closest existing work
 

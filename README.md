@@ -1,5 +1,9 @@
 # dsh-plugin-reducer
 
+[![CI](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/ci.yml/badge.svg)](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/ci.yml)
+[![Upstream canary](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/upstream-canary.yml/badge.svg)](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/upstream-canary.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 [简体中文](README.zh-CN.md)
 
 **Your DeepSeek Harness profile is broken. Which plugins are actually required
@@ -10,14 +14,21 @@ to reproduce it?**
 profile. It tests disposable shadow profiles, so it does not rewrite the real
 profile while searching.
 
+It is intentionally a **companion CLI, not an installable Harness bundle**. A
+diagnostic that lives inside the failing plugin tree can disappear precisely
+when it is needed. Community catalogs may index this repository as tooling, but
+should not present it as a `dsh plugin add` package.
+
 ![A real rc.7 run reducing three candidate bundles to an interacting pair](assets/demo.png)
 
 It catches interaction failures that "disable plugins one by one" misses. If A
 works, B works, and A+B fails, the result is `{A, B}`.
 
-> Early preview: tested against `@deepseek-ai/dsh@0.1.0-rc.7` on Windows with
-> Node.js 24. The repository CI also targets Windows, macOS, and Linux on the
-> Node.js versions supported by Harness.
+> Compatibility: the real interaction test targets the current stable
+> `@deepseek-ai/dsh@0.1.0-rc.7` contract. Repository CI covers Windows, macOS,
+> and Linux on the Node.js versions supported by Harness, while a weekly canary
+> initializes and reads the official `next` Web profile to detect upstream
+> layout drift before it reaches a stable release.
 
 Found a real profile failure? [Open a redacted field report](https://github.com/ArmyWas/dsh-plugin-reducer/issues/new?template=field-report.yml).
 
@@ -46,6 +57,12 @@ dsh-plugin-reducer --profile web --probe web --report reducer-report.json
 Remove it with `npm uninstall --global dsh-plugin-reducer`. The package is not
 published to the npm registry yet, so prefer the pinned release URL over an
 unversioned `npx` command.
+
+The npm package metadata already enables public, provenance-bearing
+publication. Registry publication remains a separate release gate because it
+requires an authenticated package owner and two-factor/trusted-publisher
+verification; the GitHub tarball above remains the source of truth until that
+gate is completed.
 
 For source development:
 
@@ -217,6 +234,7 @@ replace them.
 - [Machine-output JSON Schema](schemas/dsh-plugin-reducer-machine-output.schema.json)
 - [Integration contract](docs/INTEGRATION.md)
 - [Upstream RFC](docs/UPSTREAM_RFC.md)
+- [Stable-release and adoption gates](docs/RELEASE_CRITERIA.md)
 - [Community launch kit](docs/COMMUNITY_LAUNCH.md)
 - [GitHub publication runbook](docs/PUBLISH_RUNBOOK.md)
 - [Official Discussion draft](docs/OFFICIAL_DISCUSSION.md)
