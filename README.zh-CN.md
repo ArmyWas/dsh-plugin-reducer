@@ -1,5 +1,9 @@
 # dsh-plugin-reducer
 
+[![CI](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/ci.yml/badge.svg)](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/ci.yml)
+[![上游兼容探针](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/upstream-canary.yml/badge.svg)](https://github.com/ArmyWas/dsh-plugin-reducer/actions/workflows/upstream-canary.yml)
+[![许可证](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 [English](README.md)
 
 **DeepSeek Harness 的 profile 坏了，究竟哪几个插件才是复现故障所必需的？**
@@ -8,14 +12,18 @@
 影子 profile 中自动测试插件组合，找出导致故障的 **1-最小插件集合**，不靠修改
 真实 profile 来试错。
 
+它有意采用**外置配套 CLI**，而不是可由 `dsh plugin add` 安装的 Harness bundle。
+如果诊断工具本身依赖已经损坏的插件树，最需要它时反而可能无法启动。社区目录
+可以把本仓库列为工具，但不应把它展示为普通 Harness 插件。
+
 ![在真实 rc.7 上将三个候选 bundle 缩减为一对交互插件](assets/demo.png)
 
 它尤其适合定位普通“逐个禁用”会漏掉的交互故障：A 单独正常，B 单独正常，A+B
 才崩，最终结果就是 `{A, B}`。
 
-> 当前是早期预览版：已在 Windows + Node.js 24 上用
-> `@deepseek-ai/dsh@0.1.0-rc.7` 完成真实启动验证；CI 面向 Windows、macOS、Linux
-> 和 Harness 支持的 Node.js 版本。
+> 兼容性：真实交互测试以当前稳定的 `@deepseek-ai/dsh@0.1.0-rc.7` 为基线；
+> CI 覆盖 Windows、macOS、Linux 和 Harness 支持的 Node.js 版本。每周上游探针
+> 还会初始化并读取官方 `next` Web profile，在变更进入稳定版之前发现结构漂移。
 
 遇到了真实的 profile 故障？欢迎提交一份[经过人工检查和脱敏的现场报告](https://github.com/ArmyWas/dsh-plugin-reducer/issues/new?template=field-report.yml)。
 
@@ -40,6 +48,10 @@ dsh-plugin-reducer --profile web --probe web --report reducer-report.json
 
 卸载命令是 `npm uninstall --global dsh-plugin-reducer`。当前尚未发布到 npm
 registry，因此请使用固定版本的 Release 地址，不要使用未固定的 `npx` 命令。
+
+包元数据已经为公开发布和 provenance 来源证明准备好。npm 发布仍需完成包所有者
+登录及双因素/可信发布者验证；在该门槛真正通过前，上述 GitHub 固定版本压缩包仍是
+唯一推荐来源。
 
 参与源码开发时：
 
@@ -196,6 +208,7 @@ dsh-plugin-reducer --profile web --probe web --repeat 3 --max-trials 512
 - [机器输出 JSON Schema](schemas/dsh-plugin-reducer-machine-output.schema.json)
 - [集成契约](docs/INTEGRATION.md)
 - [上游 RFC](docs/UPSTREAM_RFC.md)
+- [稳定版与真实采用门槛](docs/RELEASE_CRITERIA.md)
 - [社区发布材料](docs/COMMUNITY_LAUNCH.md)
 - [GitHub 发布运行手册](docs/PUBLISH_RUNBOOK.md)
 - [官方 Discussion 定稿](docs/OFFICIAL_DISCUSSION.md)
