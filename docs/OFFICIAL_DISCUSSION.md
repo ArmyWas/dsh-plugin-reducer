@@ -49,10 +49,10 @@ Node 22.19 and 24; a separate weekly canary initializes the official Harness
 - Runs outside the plugin tree, remaining available when that tree fails to
   load.
 
-Install the pinned, prebuilt v0.3 release:
+Install the current v0.3 preview:
 
 ```sh
-npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+npm install --global dsh-plugin-reducer@next
 dsh-plugin-reducer --profile web --probe web --report reducer-report.json
 ```
 

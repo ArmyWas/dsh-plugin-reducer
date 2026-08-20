@@ -46,23 +46,27 @@ set and a scrubbed JSON report suitable for an issue.
 
 ## Quick start
 
-Install the verified, prebuilt GitHub release — no clone or local build is
-required:
+Install the current preview from npm — no clone or local build is required:
 
 ```sh
-npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+npm install --global dsh-plugin-reducer@next
 dsh-plugin-reducer --profile web --probe web --report reducer-report.json
 ```
 
-Remove it with `npm uninstall --global dsh-plugin-reducer`. The package is not
-published to the npm registry yet, so prefer the pinned release URL over an
-unversioned `npx` command.
+Remove it with `npm uninstall --global dsh-plugin-reducer`. For a one-off run,
+use `npx --yes --package dsh-plugin-reducer@next dsh-plugin-reducer --help`.
 
-The npm package metadata already enables public, provenance-bearing
-publication. Registry publication remains a separate release gate because it
-requires an authenticated package owner and two-factor/trusted-publisher
-verification; the GitHub tarball above remains the source of truth until that
-gate is completed.
+The `next` tag is intentional: controlled tests are strong, but the first
+stable release still requires three independent, privacy-reviewed field
+reports. Version 0.3.1 and later are produced from their matching public GitHub
+Releases by the repository's OIDC trusted-publishing workflow and carry npm
+provenance. npm automatically assigned `latest` to the initial 0.3.0 package;
+that bootstrap tag is not evidence that the stable-release gate passed. The
+equivalent pinned 0.3.1 artifact is:
+
+```sh
+npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.1/dsh-plugin-reducer-0.3.1.tgz
+```
 
 For source development:
 

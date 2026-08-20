@@ -1,6 +1,16 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import test from 'node:test'
-import { parseArgs } from '../src/args.js'
+import { parseArgs, VERSION } from '../src/args.js'
+
+const packageJson = JSON.parse(await readFile(
+  new URL('../package.json', import.meta.url),
+  'utf8',
+))
+
+test('runtime version matches package metadata', () => {
+  assert.equal(VERSION, packageJson.version)
+})
 
 test('parses a custom command after the separator', () => {
   const options = parseArgs(['--profile', 'web', '--repeat=2', '--', 'node', 'probe.js'])

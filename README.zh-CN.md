@@ -39,19 +39,25 @@
 
 ## 快速开始
 
-直接安装经过验证的 GitHub Release，无需克隆仓库或本地构建：
+直接从 npm 安装当前预览版，无需克隆仓库或本地构建：
 
 ```sh
-npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.0/dsh-plugin-reducer-0.3.0.tgz
+npm install --global dsh-plugin-reducer@next
 dsh-plugin-reducer --profile web --probe web --report reducer-report.json
 ```
 
-卸载命令是 `npm uninstall --global dsh-plugin-reducer`。当前尚未发布到 npm
-registry，因此请使用固定版本的 Release 地址，不要使用未固定的 `npx` 命令。
+卸载命令是 `npm uninstall --global dsh-plugin-reducer`。如果只想临时运行一次，
+可用 `npx --yes --package dsh-plugin-reducer@next dsh-plugin-reducer --help`。
 
-包元数据已经为公开发布和 provenance 来源证明准备好。npm 发布仍需完成包所有者
-登录及双因素/可信发布者验证；在该门槛真正通过前，上述 GitHub 固定版本压缩包仍是
-唯一推荐来源。
+使用 `next` 标签是有意为之：受控测试已经充分，但首个稳定版仍需三个彼此独立、
+经过隐私检查的真实 field report。0.3.1 及后续 npm 版本由仓库的 OIDC 可信发布工作流从
+对应的公开 GitHub Release 生成，并附带 npm provenance 来源证明。npm 会自动把首次
+登记的 0.3.0 标为 `latest`；这个初始化标签不代表稳定版门槛已经通过。等价的 0.3.1
+固定版本安装地址是：
+
+```sh
+npm install --global https://github.com/ArmyWas/dsh-plugin-reducer/releases/download/v0.3.1/dsh-plugin-reducer-0.3.1.tgz
+```
 
 参与源码开发时：
 
