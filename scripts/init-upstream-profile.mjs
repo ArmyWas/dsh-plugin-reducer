@@ -5,28 +5,17 @@ import {
   initProfile,
   PROFILE_TEMPLATES,
 } from '@deepseek-ai/dsh-app-boot'
+import { normalizeWebProfileTemplate } from './profile-template-contract.mjs'
 
 const dshHome = process.env.DSH_HOME
 assert.ok(dshHome, 'DSH_HOME is required')
 
-const template = PROFILE_TEMPLATES.web
-const usesLegacyTemplate = Array.isArray(template)
-const bundles = usesLegacyTemplate ? template : template?.bundles
-const patchReload = usesLegacyTemplate ? undefined : template?.patchReload
-
-assert.ok(
-  Array.isArray(bundles),
-  'app-boot next must expose bundles for the web profile template',
+const { templateShape, bundles, patchReload } = normalizeWebProfileTemplate(
+  PROFILE_TEMPLATES.web,
 )
-if (!usesLegacyTemplate) {
-  assert.ok(
-    patchReload === 'live' || patchReload === 'startup',
-    'the object-form web profile template must expose a valid patchReload policy',
-  )
-}
 
 const profileDirectory = join(dshHome, 'profiles', 'web')
-if (usesLegacyTemplate) {
+if (patchReload === undefined) {
   initProfile(profileDirectory, bundles)
 } else {
   initProfile(profileDirectory, bundles, patchReload)
@@ -38,7 +27,13 @@ assert.deepEqual(
   bundles,
   'initialized manifest must preserve the official ordered bundle template',
 )
-if (!usesLegacyTemplate) {
+if (patchReload === undefined) {
+  assert.equal(
+    manifest.dsh?.profile?.patchReload,
+    undefined,
+    'initialized manifest must not invent a patchReload policy',
+  )
+} else {
   assert.equal(
     manifest.dsh?.profile?.patchReload,
     patchReload,
@@ -48,7 +43,7 @@ if (!usesLegacyTemplate) {
 
 process.stdout.write(`${JSON.stringify({
   profile: 'web',
-  templateShape: usesLegacyTemplate ? 'array' : 'object',
+  templateShape,
   bundles,
   patchReload,
   manifest: join(profileDirectory, 'package.json'),

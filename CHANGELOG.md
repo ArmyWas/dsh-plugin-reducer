@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Keep the upstream Web-profile canary compatible with legacy array templates,
+  historical object templates that carry `patchReload`, and the current object
+  template where app-boot no longer exposes or writes that policy.
+
 ## 0.3.1 - 2026-08-21
 
 - Put the verified GitHub release installation path in the primary quick start.
